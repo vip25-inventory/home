@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career — VIP25 Freelancer Application</title>
+  <meta name="description" content="Join VIP25 as a freelancer. Apply now and start earning with your tech skills." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVBAR (same as main site)
+       ============================================ -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="./resources/Logo.png" alt="">
+        <span class="nav-logo-text"><span>VIP</span>25</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/contact-form">Contact</a></li>
+        <li><a href="/career" class="nav-career active">Career</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- ============================================
+       CAREER HERO
+       ============================================ -->
+  <div class="career-hero">
+    <video class="hero-video-bg" autoplay muted loop playsinline poster="">
+      <!-- Primary video -->
+      <source src="./resources/carrer video.mp4" type="video/mp4" />
+      <!-- Fallback video -->
+      <source src="./resources/VID-20260223-WA0001.mp4" type="video/mp4" />
+    </video>
+    <div class="container">
+      <div class="career-hero-content">
+        <div class="section-label">// JOIN THE TEAM</div>
+        <div class="glow-line"></div>
+        <h1 class="section-title" style="font-size: clamp(32px, 5vw, 56px);">
+          <span>From Learning</span><br>To Earning
+        </h1>
+        <p style="font-size: 18px; color: var(--text-sub); max-width: 560px; margin-top: 16px;  font-family: 'Inter';">
+          VIP25 is building the next generation of tech professionals. Apply as a freelancer — build skills, get
+          projects, grow together.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================
+       CAREER FORM SECTION
+       ============================================ -->
+  <section class="career-form-section">
+    <div class="container">
+      <div class="career-grid">
+
+        <!-- Left Info Panel -->
+        <div class="reveal-left">
+          <div class="career-info-card">
+            <h3>🌟 Why Join VIP25?</h3>
+            <ul class="career-perks">
+              <li>Real project experience with live clients</li>
+              <li>Mentorship from senior professionals</li>
+              <li>Flexible remote work environment</li>
+              <li>Earn while you learn</li>
+              <li>Build a strong portfolio fast</li>
+              <li>Be part of a growing tech community</li>
+              <li>Performance-based growth opportunities</li>
+              <li>Access to exclusive resources & tools</li>
+            </ul>
+          </div>
+
+          <!-- Roles we look for -->
+          <div
+            style="margin-top: 24px; background: var(--bg-card); border: 1px solid var(--border-green); border-radius: var(--radius); padding: 28px;">
+            <div class="mv-label" style="margin-bottom: 12px; font-size: 14px;">// ROLES WE HIRE FOR</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="skill-tag active">Web Dev</span>
+              <span class="skill-tag active">App Dev</span>
+              <span class="skill-tag active">UI/UX Design</span>
+              <span class="skill-tag active">AI/ML</span>
+              <span class="skill-tag active">Automation</span>
+              <span class="skill-tag active">Content</span>
+              <span class="skill-tag active">Marketing</span>
+              <span class="skill-tag active">QA Testing</span>
+            </div>
+          </div>
+
+          <!-- Image -->
+          <img src="./resources/Carrer image.jpeg" alt="VIP25 team collaboration" loading="lazy"
+            style="width:100%; border-radius:var(--radius); border:1px solid var(--border-green); margin-top:24px; box-shadow: 0 0 30px rgba(76,175,80,0.1);" />
+        </div>
+
+
+        <!-- Right Form Card -->
+        <div class="reveal-right">
+          <div class="form-card" id="careerFormCard">
+            <h3
+              style="font-size: 22px; font-weight: 700; color: var(--text-heading); margin-bottom: 8px; font-family: 'Orbitron';">
+              Freelancer Application
+            </h3>
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 28px; font-family: 'Sora';">
+              Fill out this form and our team will review your application within 48 hours.
+            </p>
+
+            <form id="careerForm" novalidate>
+
+              <!-- Row 1: Name + Email -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="ca-name">Full Name *</label>
+                  <input type="text" id="ca-name" name="fullname" placeholder="Your full name" />
+                  <div class="form-error" id="ca-err-name">Please enter your name.</div>
+                </div>
+                <div class="form-group">
+                  <label for="ca-email">Email Address *</label>
+                  <input type="email" id="ca-email" name="email" placeholder="your@email.com" />
+                  <div class="form-error" id="ca-err-email">Please enter a valid email.</div>
+                </div>
+              </div>
+
+              <!-- Row 2: Phone + Experience -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="ca-phone">Phone Number *</label>
+                  <input type="tel" id="ca-phone" name="phone" placeholder="+91 00000 00000" />
+                  <div class="form-error" id="ca-err-phone">Please enter your phone number.</div>
+                </div>
+                <div class="form-group">
+                  <label for="ca-experience">Experience Level *</label>
+                  <select id="ca-experience" name="experience">
+                    <option value="" disabled selected>Select level</option>
+                    <option value="fresher">Fresher (0–1 yr)</option>
+                    <option value="junior">Junior (1–2 yrs)</option>
+                    <option value="mid">Mid-Level (2–4 yrs)</option>
+                    <option value="senior">Senior (4+ yrs)</option>
+                  </select>
+                  <div class="form-error" id="ca-err-exp">Please select your experience level.</div>
+                </div>
+              </div>
+
+              <!-- Skills -->
+              <div class="form-group">
+                <label>Primary Skills *</label>
+                <div class="skill-tags" id="skillTags">
+                  <span class="skill-tag" data-val="web-dev">Web Dev</span>
+                  <span class="skill-tag" data-val="app-dev">App Dev</span>
+                  <span class="skill-tag" data-val="uiux">UI/UX Design</span>
+                  <span class="skill-tag" data-val="ai-ml">AI/ML</span>
+                  <span class="skill-tag" data-val="automation">Automation</span>
+                  <span class="skill-tag" data-val="react">React / Next.js</span>
+                  <span class="skill-tag" data-val="node">Node.js</span>
+                  <span class="skill-tag" data-val="python">Python</span>
+                  <span class="skill-tag" data-val="flutter">Flutter</span>
+                  <span class="skill-tag" data-val="content">Content Writing</span>
+                  <span class="skill-tag" data-val="marketing">Digital Marketing</span>
+                  <span class="skill-tag" data-val="qa">QA Testing</span>
+                </div>
+                <input type="hidden" id="ca-skills" name="skills" />
+                <div class="form-error" id="ca-err-skills">Please select at least one skill.</div>
+              </div>
+
+              <!-- Portfolio -->
+              <div class="form-group">
+                <label for="ca-portfolio">Portfolio URL *</label>
+                <input type="url" id="ca-portfolio" name="portfolio" placeholder="https://yourportfolio.com" />
+                <div class="form-error" id="ca-err-portfolio">Please enter your portfolio link.</div>
+              </div>
+              <div class="form-group">
+                <label for="ca-portfolio">LinkedIn URL *</label>
+                <input type="url" id="ca-linkedin" name="linkedin" placeholder="https://github.com/yourusername" />
+                <div class="form-error" id="ca-err-linkedin">Please enter your Linkedin link.</div>
+              </div>
+              <div class="form-group">
+                <label for="ca-portfolio">Github URL </label>
+                <input type="url" id="ca-github" name="github" placeholder="https://linkedin/yourusername" />
+                <div class="form-error" id="ca-err-github">Please enter your Github link.</div>
+              </div>
+              <div class="form-group">
+                <label for="ca-portfolio">Top Project Link (Live / GitHub) </label>
+                <input type="url" id="ca-project1" name="project1" placeholder="Enter Your 1st Project Link" />
+                <div class="form-error" id="ca-err-project1">Please enter your Project link.</div>
+              </div>
+              <div class="form-group">
+                <label for="ca-portfolio">Top Project Link (Live / GitHub)</label>
+                <input type="url" id="ca-project2" name="project2" placeholder="Enter Your 2nd Project Link" />
+                <div class="form-error" id="ca-err-project2">Please enter your project link.</div>
+              </div>
+              <div class="form-group">
+                <label for="ca-project3">Top Project Link (Live / GitHub)</label>
+                <input type="url" id="ca-project3" name="project3" placeholder="Enter Your 3rd Project Link" />
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <label for="ca-message">Tell Us About Yourself *</label>
+                <textarea id="ca-message" name="message"
+                  placeholder="Briefly describe your background, what you're good at, past projects, and why you want to join VIP25..."
+                  rows="5"></textarea>
+                <div class="form-error" id="ca-err-message">Please tell us about yourself.</div>
+              </div>
+
+              <!-- Availability -->
+              <div class="form-group">
+                <label for="ca-availability">Weekly Availability *</label>
+                <select id="ca-availability" name="availability">
+                  <option value="" disabled selected>Hours per week</option>
+                  <option value="5-10">5–10 hours/week (Part-time)</option>
+                  <option value="10-20">10–20 hours/week (Semi-active)</option>
+                  <option value="20-40">20–40 hours/week (Active)</option>
+                  <option value="40+">40+ hours/week (Full-time freelance)</option>
+                </select>
+                <div class="form-error" id="ca-err-avail">Please select your availability.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit">
+                Submit Application ➤
+              </button>
+            </form>
+
+            <div class="form-success" id="careerFormSuccess">
+              🎉 Application submitted! Our team will review it and contact you within 48 hours. Welcome to the VIP25
+              community!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+     WHATSAPP COMMUNITY
+     ============================================ -->
+  <section style="padding: 80px 0; background: var(--bg-main); position: relative; overflow: hidden;">
+
+    <!-- Background glow -->
+    <div style="
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37,211,102,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  "></div>
+
+    <div class="container">
+
+      <!-- Section Label -->
+      <div style="text-align: center; margin-bottom: 48px;" class="reveal">
+        <div class="section-label">// COMMUNITY</div>
+        <div class="glow-line" style="margin: 0 auto 24px;"></div>
+        <h2 class="section-title">Join Our <span>WhatsApp Community</span></h2>
+        <p class="section-desc" style="margin: 0 auto;">
+          Connect with 100+ freelancers, get project updates, share skills, and grow together — all in one place.
+        </p>
+      </div>
+
+      <!-- Community Card -->
+      <div class="reveal" style="
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid rgba(37,211,102,0.3);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(37,211,102,0.08);
+    ">
+
+        <!-- Top shimmer line -->
+        <div style="
+        position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
+        background: linear-gradient(90deg, transparent, #25D366, transparent);
+      "></div>
+
+        <!-- WhatsApp Icon + Text layout -->
+        <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+
+          <!-- Left: WA Icon Circle -->
+          <div style="
+          width: 110px; height: 110px; flex-shrink: 0;
+          background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05));
+          border: 1px solid rgba(37,211,102,0.4);
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 0 40px rgba(37,211,102,0.2);
+          animation: waPulse 2.5s ease-in-out infinite;
+        ">
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="#25D366">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.83L.057 23.196a.75.75 0 00.92.92l5.42-1.461A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.95-1.35l-.355-.211-3.684.993.983-3.596-.231-.371A9.722 9.722 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z" />
+            </svg>
+          </div>
+
+          <!-- Right: Text + Benefits + Button -->
+          <div style="flex: 1; min-width: 220px;">
+            <h3 style="
+            font-family: 'Sora'; font-weight: 700;
+            font-size: 22px; color: var(--text-heading);
+            margin-bottom: 12px;
+          ">VIP25 Freelancer Community</h3>
+
+            <p
+              style="font-size: 14px; color: var(--text-sub);font-family: 'Inter'; margin-bottom: 20px; line-height: 1.7;">
+              Get instant access to project opportunities, peer support, exclusive learning resources, and direct
+              communication with the VIP25 team.
+            </p>
+
+            <!-- Benefit Pills -->
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;">
+              <span style="
+              background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);
+              border-radius: 50px; padding: 4px 14px;font-family: 'Inter';
+              font-size: 12px; color: #25D366; font-weight: 600;
+            ">📢 Project Alerts</span>
+              <span style="
+              background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);
+              border-radius: 50px; padding: 4px 14px;font-family: 'Inter';
+              font-size: 12px; color: #25D366; font-weight: 600;
+            ">🤝 Peer Support</span>
+              <span style="
+              background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);
+              border-radius: 50px; padding: 4px 14px;font-family: 'Inter';
+              font-size: 12px; color: #25D366; font-weight: 600;
+            ">🎓 Free Resources</span>
+              <span style="
+              background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);
+              border-radius: 50px; padding: 4px 14px;font-family: 'Inter';
+              font-size: 12px; color: #25D366; font-weight: 600;
+            ">⚡ Direct Team Access</span>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="https://www.whatsapp.com/channel/0029VbCOOE2C6Zvah0s59x0b" target="_blank" rel="noopener" style="
+              display: inline-flex; align-items: center; gap: 10px;
+              background: #25D366;
+              color: #000; font-family: 'Sora', sans-serif;
+              font-weight: 700; font-size: 15px;
+              padding: 14px 28px; border-radius: 8px;
+              text-decoration: none;
+              box-shadow: 0 0 30px rgba(37,211,102,0.35);
+              transition: all 0.3s ease;
+              
+            " onmouseover="this.style.boxShadow='0 0 50px rgba(37,211,102,0.6)'; this.style.transform='translateY(-2px)';"
+              onmouseout="this.style.boxShadow='0 0 30px rgba(37,211,102,0.35)'; this.style.transform='translateY(0)';">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.83L.057 23.196a.75.75 0 00.92.92l5.42-1.461A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.95-1.35l-.355-.211-3.684.993.983-3.596-.231-.371A9.722 9.722 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z" />
+              </svg>
+              Join Community Now
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Member count strip -->
+        <div style="
+        margin-top: 32px; padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      ">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Avatar stack -->
+            <div style="display: flex;">
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4CAF50,#1a8c1e);border:2px solid var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:13px;margin-left:-4px;">
+                👨‍💻</div>
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#a07c10);border:2px solid var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:13px;margin-left:-8px;">
+                👩‍💻</div>
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4CAF50,#D4AF37);border:2px solid var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:13px;margin-left:-8px;">
+                🧑‍💻</div>
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:var(--bg-alt);border:2px solid var(--border-green);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);font-weight:700;margin-left:-8px;">
+                +97</div>
+            </div>
+            <span style="font-size:13px; color:var(--text-sub);">
+              <strong style="color:var(--text-heading);font-family: 'Inter';">100+ members</strong> already inside
+            </span>
+          </div>
+
+          <div style="
+          margin-left: auto;
+          display: flex; align-items: center; gap: 6px;
+          font-size: 12px; color: var(--text-muted);
+         font-family: 'Inter';
+        ">
+            <span style="
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #25D366;
+            box-shadow: 0 0 8px #25D366;
+            display: inline-block;
+            animation: waPulse 2s infinite;
+          "></span>
+            COMMUNITY ACTIVE
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp pulse animation -->
+  <style>
+    @keyframes waPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 40px rgba(37, 211, 102, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 60px rgba(37, 211, 102, 0.45);
+      }
+    }
+  </style>
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="./resources/Logo.png" alt="">
+            <span class="nav-logo-text"><span>VIP</span>25</span>
+          </a>
+        </div>
+
+        <p class="footer-copy">© 2026 VIP25. All rights reserved. <span style="color:var(--green)">Empowering Digital
+            Success.</span></p>
+
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/career">Career</a></li>
+          <li><a href="/contact-form">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

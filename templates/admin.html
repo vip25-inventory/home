@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - VIP25</title>
+    <style>
+        :root {
+            --bg: #0b1114;
+            --card-bg: #151b1f;
+            --border: #283035;
+            --green: #4CAF50;
+            --text-main: #ffffff;
+            --text-sub: #a0aab2;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--green);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--text-sub);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        td {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .message-cell {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            color: var(--green);
+        }
+
+        .message-cell:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            margin-top: 0;
+            color: var(--green);
+        }
+
+        .modal p {
+            line-height: 1.6;
+            color: #d1d5db;
+            white-space: pre-wrap;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            float: right;
+        }
+
+        .close-modal:hover {
+            background: #283035;
+        }
+
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: var(--text-sub);
+        }
+
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: var(--green);
+            border: 1px solid var(--green);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+            margin-left: auto;
+        }
+
+        .export-btn:hover {
+            background: var(--green);
+            color: #000;
+        }
+
+        .tab-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>VIP25 Control Panel</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="container">
+        <div class="tab-row">
+            <div class="tabs" style="margin-bottom:0;">
+                <button class="tab active" onclick="switchTab('client', this)">Client Service Forms ({{
+                    client_forms|length }})</button>
+                <button class="tab" onclick="switchTab('career', this)">Career Applications ({{ career_forms|length
+                    }})</button>
+            </div>
+            <a id="export-btn" class="export-btn" href="/admin/export/clients">⬇ Export CSV</a>
+        </div>
+
+        <!-- Client Forms Tab -->
+        <div id="client" class="tab-content active">
+            <div class="table-responsive">
+                {% if client_forms %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Service Type</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in client_forms %}
+                        <tr>
+                            <td>{{ form.formatted_date }}</td>
+                            <td>{{ form.name }}</td>
+                            <td><a href="mailto:{{ form.email }}" style="color:inherit">{{ form.email }}</a></td>
+                            <td>{{ form.phone }}</td>
+                            <td>{{ form.service|capitalize }}</td>
+                            <td class="message-cell" data-title="Message from {{ form.name }}"
+                                data-body="{{ form.message }}"
+                                onclick="openModal(this.getAttribute('data-title'), this.getAttribute('data-body'))">
+                                View Message
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">No client requests found.</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Career Forms Tab -->
+        <div id="career" class="tab-content">
+            <div class="table-responsive">
+                {% if career_forms %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Experience</th>
+                            <th>Skills</th>
+                            <th>Links</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in career_forms %}
+                        <tr>
+                            <td>{{ form.formatted_date }}</td>
+                            <td>{{ form.fullname }}</td>
+                            <td>{{ form.email }}</td>
+                            <td>{{ form.phone }}</td>
+                            <td>{{ form.experience|capitalize }}</td>
+                            <td>{{ form.skills }}</td>
+                            <td>
+                                {% if form.portfolio %}<a href="{{ form.portfolio }}" target="_blank"
+                                    style="color:var(--green)">Port</a>{% endif %}
+                                {% if form.linkedin %} | <a href="{{ form.linkedin }}" target="_blank"
+                                    style="color:var(--green)">LI</a>{% endif %}
+                                {% if form.github %} | <a href="{{ form.github }}" target="_blank"
+                                    style="color:var(--green)">GH</a>{% endif %}
+                                {% if form.project1 %} | <a href="{{ form.project1 }}" target="_blank"
+                                    style="color:var(--green)">Proj1</a>{% endif %}
+                                {% if form.project2 %} | <a href="{{ form.project2 }}" target="_blank"
+                                    style="color:var(--green)">Proj2</a>{% endif %}
+                                {% if form.project3 %} | <a href="{{ form.project3 }}" target="_blank"
+                                    style="color:var(--green)">Proj3</a>{% endif %}
+                            </td>
+                            <td class="message-cell" data-title="Application from {{ form.fullname }}"
+                                data-body="{{ form.message }}&#10;&#10;Availability: {{ form.availability }}"
+                                onclick="openModal(this.getAttribute('data-title'), this.getAttribute('data-body'))">
+                                View Details
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">No career applications found.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Reusable Modal -->
+    <div class="modal-overlay" id="messageModal">
+        <div class="modal">
+            <h3 id="modalTitle">Message</h3>
+            <p id="modalBody"></p>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const exportUrls = {
+            'client': '/admin/export/clients',
+            'career': '/admin/export/careers'
+        };
+
+        function switchTab(tabId, btn) {
+            // Toggle Content
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            // Toggle Buttons
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Update export button URL
+            document.getElementById('export-btn').href = exportUrls[tabId];
+        }
+
+        function openModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            document.getElementById('messageModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        window.onclick = function (event) {
+            let modal = document.getElementById('messageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+*.env
+/sup.py
+/mong.py
+__pycache__/
+venv/ # virtual environment directories
+.env # environment variable files (often contains secrets)
