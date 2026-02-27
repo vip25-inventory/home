@@ -46,17 +46,20 @@ uri = os.environ.get("MONGO_URI", "mongodb+srv://vip25admin:vip%40admin25@cluste
 client = None
 db = None
 try:
-    client = MongoClient(uri, server_api=ServerApi('1'))
-    client.admin.command('ping')
+    client = MongoClient(
+        uri,
+        server_api=ServerApi('1'),
+        serverSelectionTimeoutMS=5000,
+        tls=True,
+        tlsAllowInvalidCertificates=True  # Fixes SSL handshake error on Windows Python 3.11
+    )
     db = client.vip25
-    print("Successfully connected to MongoDB!")
+    print("MongoDB client initialized.")
 except Exception as e:
-    print(f"Warning: MongoDB connection failed. Database operations will fail. Error: {e}")
+    print(f"Warning: MongoDB initialization failed. Error: {e}")
 
-# --- Admin Credentials ---
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-# Read hashed password from environment. If none, hash a default password.
-ADMIN_PASSWORD_HASH = os.environ.get('ADMIN_PASSWORD_HASH', generate_password_hash('admin123')) 
+# Admin credentials are loaded dynamically in the login route from .env
+
 
 # Helper to sanitize inputs
 def sanitize(text):
@@ -64,7 +67,7 @@ def sanitize(text):
         return text
     return bleach.clean(text.strip())
 
-# --- Routes for Static HTML Pages ---
+# --- Routes for Pages ---
 
 @app.route('/')
 @app.route('/home')
@@ -74,19 +77,11 @@ def sanitize(text):
 @app.route('/how')
 @app.route('/contact-form')
 def home():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html')
 
 @app.route('/career')
 def career():
-    return send_from_directory('.', 'career.html')
-
-@app.route('/<path:filename>')
-def serve_static(filename):
-    # This will serve files like style.css, script.js, and everything in resources/
-    # Security: do not serve sensitive files
-    if filename in ['app.py', 'database.db']:
-        return "Unauthorized", 401
-    return send_from_directory('.', filename)
+    return render_template('career.html')
 
 
 # --- API Endpoints ---
@@ -147,8 +142,12 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        
-        if username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password):
+
+        # Read credentials fresh from env on every login attempt
+        admin_username = os.environ.get('ADMIN_USERNAME', 'admin')
+        admin_hash = os.environ.get('ADMIN_PASSWORD_HASH', generate_password_hash('admin123'))
+
+        if username == admin_username and check_password_hash(admin_hash, password):
             session['admin_logged_in'] = True
             return redirect(url_for('admin_dashboard'))
         else:
@@ -239,4 +238,4 @@ def export_careers():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=3000)
